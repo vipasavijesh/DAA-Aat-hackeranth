@@ -1,0 +1,28 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'stringConstruction' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+
+def stringConstruction(s):
+    # Convert string to set to get unique characters
+    unique_characters = set(s)
+    # Return the number of unique characters (cost)
+    return len(unique_characters)
+
+
+if __name__ == '__main__':
+    q = int(input().strip())  # Read number of queries
+    for _ in range(q):
+        s = input().strip()  # Read each string
+        result = stringConstruction(s)  # Calculate minimum construction cost
+        print(result)  # Print the result for each query
