@@ -1,0 +1,42 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+def maximumPeople(p, x, y, r):
+    # Convert sunny town indices to a set for fast lookup
+    sunny_towns = set(i - 1 for i in x if 1 <= i <= len(p))
+
+    # Calculate the initial sum of people in sunny towns
+    total_sunny_people = sum(p[i] for i in sunny_towns)
+
+    # Initialize max_people with the initial total sunny people
+    max_people = total_sunny_people
+
+    for cloud_y, cloud_r in zip(y, r):
+        cloud_start = cloud_y - cloud_r
+        cloud_end = cloud_y + cloud_r
+
+        # Calculate the population of sunny towns affected by the cloud
+        affected_people = sum(p[i] for i in range(cloud_start, cloud_end + 1) if i in sunny_towns)
+
+        # Calculate the maximum people in sunny towns if we remove this cloud
+        max_people = max(max_people, total_sunny_people - affected_people)
+
+    return max_people
+
+
+if __name__ == '__main__':
+    # Sample Input 0
+    n = 2
+    p = [10, 100]
+    x = [5, 100]
+    m = 1
+    y = [4]
+    r = [1]
+
+    result = maximumPeople(p, x, y, r)
+    print(result)  # Output should be 110
